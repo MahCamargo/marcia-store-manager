@@ -3,8 +3,8 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const camelize = require('camelize');
 const connection = require('../../../src/models/connection');
-const { findAll, findById } = require('../../../src/models'); 
-const { allProducts } = require('../../mocks/products.mocks');
+const { modelProducts: { findAll, findById } } = require('../../../src/models'); 
+const { allProducts } = require('../../mocks/mocks.products');
 
 chai.use(sinonChai);
 
@@ -17,8 +17,7 @@ describe('models', function () {
 
       const result = await findAll();
 
-      // Verifique se o stub foi chamado com a consulta correta
-      expect(executeStub).to.have.been.calledWith('SELECT * FROM products WHERE id');
+      expect(executeStub).to.have.been.calledWith('SELECT * FROM products');
 
             expect(result).to.deep.equal(camelize(allProducts));
 
@@ -26,20 +25,23 @@ describe('models', function () {
     });
   });
 
-//   describe('findById', function () {
-//     it('deve retornar um produto específico da base de dados', async function () {
-//       const productId = 123; 
-//       const productData = [{ }];
+   describe('findById', function () {
+  it('deve retornar um produto específico da base de dados', async function () {
+       const productId = 1; 
+       const productData = [{
+  id: 1,
+  name: 'Martelo de Thor',
+}];
 
-//           const executeStub = sinon.stub(connection, 'execute').resolves([productData]);
+           const executeStub = sinon.stub(connection, 'execute').resolves([productData]);
 
-//       const result = await findById(productId);
+       const result = await findById(productId);
 
-//             expect(executeStub).to.have.been.calledWith('SELECT * FROM products WHERE id = ?', [productId]);
+             expect(executeStub).to.have.been.calledWith('SELECT * FROM products WHERE id = ?', [productId]);
 
-//       expect(result).to.deep.equal(camelize(productData[0]));
+       expect(result).to.deep.equal(camelize(productData[0]));
 
-//       executeStub.restore();
-//     });
-//   });
+       executeStub.restore();
+     });
+   });
 });

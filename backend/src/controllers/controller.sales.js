@@ -1,4 +1,4 @@
-const { serviceSales } = require('../services/service.sales');
+const { serviceSales } = require('../services');
 const mapStatusCode = require('../utils/mapStatusCode');
 
 const findAll = async (req, res) => {
@@ -16,7 +16,7 @@ const { id } = req.params;
 
 const insertSales = async (req, res) => {
   const products = req.body;
-  const { status, data } = await insertSales(products);
+  const { status, data } = await serviceSales.insertSales(products);
   
   const statusCode = mapStatusCode(status);
   res.status(statusCode).json(data);

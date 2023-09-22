@@ -1,9 +1,16 @@
 const route = require('express').Router();
-const productsController = require('../controllers/products.controller');
+const { controllerProducts } = require('../controllers');
+const { validateProductExistence } = require('../middlewares/sales');
+const validation = require('../middlewares/validation');
 
-route.get('/', productsController.findAll);
-route.get('/:id', productsController.findById);
-route.post('/', productsController.insertProduct); // rever essa rota
-route.put('/:id', productsController.updateProduct);
+route.get('/', controllerProducts.findAll);
+route.get('/:id', controllerProducts.findById);
+route.post('/', validation, controllerProducts.insertProduct); 
+route.put(
+  '/:id', 
+  validateProductExistence,
+  validation,
+controllerProducts.updateProduct,
+);
 
 module.exports = route;
