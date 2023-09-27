@@ -31,10 +31,19 @@ const updateProduct = async (id, name) => {
   const product = await modelProducts.updateProduct(+id, name);
   const successResponse = { status: 'SUCCESSFUL', data: product };
   return successResponse;
+};
+const remover = async (id) => {
+  // const product = await modelProducts.modelProducts.findById(id);
+  //   if (!product) {  
+  //   return { status: 'NOT_FOUND', data: { message: 'Product not found' } };
+  // }
+  await modelProducts.remover(id);
+  return { status: 'DELETED' };
 }; 
  module.exports = {
   findAll,
   findById,
   insertProduct,
   updateProduct, 
+  remover,
 };

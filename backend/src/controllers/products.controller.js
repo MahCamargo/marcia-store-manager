@@ -32,9 +32,17 @@ const findAll = async (_req, res) => {
  res.status(statusCode).json(data);
  }; 
 
+ const remover = async (req, res) => {
+  const { id } = req.params;
+
+  const { status, data } = await serviceProducts.remover(id);
+
+  return res.status(mapStatusCode(status)).json(data);
+};
 module.exports = {
   findAll,
   findById,
   insertProduct,
   updateProduct,
+  remover,
 };

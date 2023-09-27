@@ -1,9 +1,9 @@
 const { serviceSales } = require('../services');
 const mapStatusCode = require('../utils/mapStatusCode');
 
-const findAll = async (req, res) => {
+const findAll = async (_req, res) => {
   const { status, data } = await serviceSales.findAll();
-
+  console.log(status);
   return res.status(mapStatusCode(status)).json(data);
 };
 

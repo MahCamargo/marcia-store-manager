@@ -26,7 +26,6 @@ const findById = async (id) => {
 
 const insertSales = async (products) => {
   try {
-    // Inserir uma nova venda na tabela "sales"
     const salesQuery = 'INSERT INTO sales (date) VALUES (NOW())'; 
     const [{ insertId }] = await connection.execute(salesQuery);
    
