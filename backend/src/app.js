@@ -15,6 +15,5 @@ app.get('/', (_request, response) => {
   response.json({ status: 'Store Manager UP!' });
 });
 module.exports = app;
-// utilizando, refazendo PR 30
-// verificar a desestruturação onde é feita, nas aulas estao  feitas no app
-// testes
+// Trouxe meu projeto da T.30, pude usar parte dele, fiz os testes com ajuda de colegas.
+// Troquei o nome de algumas constantes e funções, para deixar mais padrão, processo feito por sugestão de colegas.
